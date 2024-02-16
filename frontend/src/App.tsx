@@ -1,4 +1,5 @@
 import React, {
+  ReactNode,
   SetStateAction,
   createContext,
   useContext,
@@ -8,10 +9,18 @@ import logo from "./logo.svg";
 import "./App.css";
 import Header from "./layout/header/Header";
 import Router from "./routes/Router";
+import { BrowserRouter } from "react-router-dom";
+import { createTheme } from "@mui/material";
+import ThemeProvider from "./design/ThemeProvider";
+import CardDish from "./cards/components/card/CardDish";
+import SignupPage from "./users/pages/signup/SignupPage";
+import { TokenType } from "./users/pages/signup/userTypes";
 
 type UserContextValue = {
-  user?: null | TokenUser;
-  setUser?: React.Dispatch<SetStateAction<TokenUser | undefined>>;
+  user: null | TokenType;
+  setUser: (value: SetStateAction<null | TokenType>) => void;
+  token: null | string;
+  setToken: (value: SetStateAction<null | string>) => void;
   /* roleType?: number;
   setRoleType?: React.Dispatch<SetStateAction<number>>; */
 };
@@ -22,11 +31,11 @@ type SearchWordValue = {
   setRoleType?: React.Dispatch<SetStateAction<number>>; */
 };
 
-type TokenUser = {
-  id: string;
+/* type TokenUser = {
+  _id: string;
   isClient: boolean;
   isAdmin: boolean;
-};
+}; */
 
 /* type ContextUser = {
   id: string;
@@ -57,24 +66,32 @@ export const useUser = () => {
 };
 
 function App() {
-  const [user, setUser] = useState<TokenUser>();
+  const [user, setUser] = useState<null | TokenType>(null);
+  const [token, setToken] = useState<null | string>(null);
   const [searchWord, setSearchWord] = useState("");
   /* const [roleType, setRoleType] = useState<number>(RoleTypes.none); */
 
   return (
-    <UserContext.Provider
-      value={{
-        user,
-        setUser,
-        /* searchWord,
+    <BrowserRouter>
+      <ThemeProvider>
+        <UserContext.Provider
+          value={{
+            user,
+            setUser,
+            token,
+            setToken,
+            /* searchWord,
         setSearchWord, */
-        /* roleType,
+            /* roleType,
         setRoleType, */
-      }}
-    >
-      <Header />
-      <Router />
-    </UserContext.Provider>
+          }}
+        >
+          <Header />
+
+          <Router />
+        </UserContext.Provider>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 

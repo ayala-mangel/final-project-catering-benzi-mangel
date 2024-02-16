@@ -4,17 +4,21 @@ import Box from "@mui/material/Box";
 import LeftNavBar from "./LeftNavBar";
 import RightNavBar from "./RightNavBar";
 import SearchBar from "./SearchBar";
-import { MenuProvider } from "./MenuProvider";
-import Container from "@mui/material/Container";
+import { ThemeProvider, Toolbar } from "@mui/material";
+import { ThemeMenuProvider } from "../menu/ThemeMenuProvider";
 
 export const NavBar = () => {
   return (
-    <MenuProvider>
-      <AppBar position="sticky" style={{ backgroundColor: "darkred" }}>
-        <Container>
+    <ThemeMenuProvider>
+      <AppBar
+        position="static"
+        sx={{
+          bgcolor: "black",
+        }}
+      >
+        <Toolbar sx={{ justifyContent: "space-between" }}>
           <Box
             sx={{
-              backgroundColor: "BF1E2E",
               display: "flex",
               justifyContent: "space-between",
               py: 1,
@@ -23,14 +27,14 @@ export const NavBar = () => {
           >
             <LeftNavBar />
 
-            <Box sx={{ display: { xs: "inline-flex", md: "none" } }}>
+            {/*  <Box sx={{ display: { xs: "inline-flex", md: "none" } }}>
               <SearchBar />
             </Box>
 
-            <RightNavBar />
+            <RightNavBar /> */}
           </Box>
-        </Container>
+        </Toolbar>
       </AppBar>
-    </MenuProvider>
+    </ThemeMenuProvider>
   );
 };

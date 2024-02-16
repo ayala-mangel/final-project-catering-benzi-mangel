@@ -1,14 +1,33 @@
 const express = require("express");
 const app = express();
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
-/* async function main() {
+async function main() {
   await mongoose.connect("mongodb://127.0.0.1:27017/benzi-mangel");
   console.log("mongodb connection established on port 27017");
-} */
+}
+main().catch((err) => console.log(err));
 
 app.use(express.json());
+
+pp.use(
+  cors({
+    origin: true,
+    credentials: true,
+    methods: "GET,PUT,POST,DELETE",
+    allowedHeaders: "Content-Type, Accept, Authorization",
+  })
+);
+
+app.listen(4000, () => {
+  console.log("Connection to server established on port 4000");
+});
+
+require("./handlers/users")(app);
+/* app.use(express.json());
 
 app.use(
   cors({
@@ -41,3 +60,4 @@ app.put("/2", (req, res, next) => {
 app.get("/", (req, res, next) => {
   res.status(404).send("not found");
 });
+ */

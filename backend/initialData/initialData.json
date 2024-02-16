@@ -1,0 +1,75 @@
+{
+  "cards": [
+    {
+      "title": "אסאדו מפורק",
+      "description": "מאוד טעים",
+      "image": {
+        "url": "",
+        "alt": ""
+      },
+      "price": "120"
+    },
+    {
+      "title": "אסאדו מפורק",
+      "description": "מאוד טעים",
+      "image": {
+        "url": "",
+        "alt": ""
+      },
+      "price": "120"
+    },
+    {
+      "title": "אסאדו מפורק",
+      "description": "מאוד טעים",
+      "image": {
+        "url": "",
+        "alt": ""
+      },
+      "price": "120"
+    }
+  ],
+  "users": [
+    {
+      "name": {
+        "first": "regular",
+        "last": "user"
+      },
+      "phone": "050-0000000",
+      "email": "regular1@gmail.com",
+      "password": "Aa1234!",
+      "image": {
+        "url": "",
+        "alt": ""
+      }
+    },
+    {
+      "name": {
+        "first": "business",
+        "last": "user"
+      },
+      "phone": "050-0000000",
+      "email": "business1@gmail.com",
+      "password": "Aa1234!",
+      "image": {
+        "url": "",
+        "alt": ""
+      },
+      "isClient": true
+    },
+    {
+      "name": {
+        "first": "admin",
+        "last": "user"
+      },
+      "phone": "050-0000000",
+      "email": "admin1@gmail.com",
+      "password": "Aa1234!",
+      "image": {
+        "url": "",
+        "alt": ""
+      },
+      "isClient": true,
+      "isAdmin": true
+    }
+  ]
+}

@@ -5,16 +5,16 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@mui/material/IconButton";
-/* import { useTheme } from "../../../../providers/ThemeProvider"; */
+import { useTheme } from "../../../design/ThemeProvider";
 
 const SearchBar = () => {
-  /* const { isDark } = useTheme(); */
+  const { isDark } = useTheme();
   return (
     <Box display="inline-flex">
       <FormControl variant="standard">
         <OutlinedInput
-          sx={{ backgroundColor: "white" }}
-          /* sx={{ backgroundColor: !isDark ? "#ffffff" : "#333333" }} */
+          //sx={{ backgroundColor: "white" }}
+          sx={{ backgroundColor: !isDark ? "#ffffff" : "#333333" }}
           placeholder="חיפוש"
           size="small"
           endAdornment={

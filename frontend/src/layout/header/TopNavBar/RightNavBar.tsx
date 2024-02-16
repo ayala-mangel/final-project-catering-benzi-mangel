@@ -7,11 +7,11 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import MoreButton from "./MoreButton";
 import Logged from "./Logged";
 import NotLogged from "./NotLogged";
-/* import { useTheme } from "../../../../providers/ThemeProvider"; */
 import { useUser } from "../../../App";
+import { useTheme } from "../../../design/ThemeProvider";
 
 const RightNavBar = () => {
-  /* const { isDark, toggleDarkMode } = useTheme(); */
+  const { isDark, toggleDarkMode } = useTheme();
   const { user } = useUser();
 
   return (
@@ -23,9 +23,9 @@ const RightNavBar = () => {
       >
         <SearchBar />
 
-        {/*  <IconButton onClick={toggleDarkMode} sx={{ marginLeft: 1 }}>
+        <IconButton onClick={toggleDarkMode} sx={{ marginLeft: 1 }}>
           {isDark ? <LightModeIcon /> : <DarkModeIcon />}
-        </IconButton> */}
+        </IconButton>
 
         {!user && <NotLogged />}
 
