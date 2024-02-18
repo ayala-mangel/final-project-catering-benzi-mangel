@@ -7,7 +7,7 @@ import LoopIcon from "@mui/icons-material/Loop";
 
 type Props = {
   title?: string;
-  onSubmit: () => void;
+  onSubmit: (event: React.FormEvent) => void;
   onReset: () => void;
   onFormChange: () => Joi.ValidationError | null;
   to?: string;
@@ -37,12 +37,17 @@ const Form: FC<Props> = ({
 }) => {
   const navigate = useNavigate();
 
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault(); // Prevent default form submission behavior
+    onSubmit(event);
+  };
+
   return (
     <Box
       component="form"
       color={color}
       sx={{ mt: 2, p: { xs: 1, sm: 2 }, ...styles }}
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
       autoComplete="off"
       noValidate
     >

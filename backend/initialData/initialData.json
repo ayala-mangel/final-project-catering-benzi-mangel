@@ -1,11 +1,20 @@
 {
   "cards": [
     {
-      "title": "אסאדו מפורק",
+      "title": "Salmon",
       "description": "מאוד טעים",
       "image": {
-        "url": "",
-        "alt": ""
+        "url": "https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_1280.jpg",
+        "alt": "bdfgdhbg"
+      },
+      "price": "1200000000"
+    },
+    {
+      "title": "Hamburger",
+      "description": "מאוד טעים",
+      "image": {
+        "url": "https://cdn.pixabay.com/photo/2014/10/19/20/59/hamburger-494706_1280.jpg",
+        "alt": "Hamburger"
       },
       "price": "120"
     },
@@ -13,62 +22,24 @@
       "title": "אסאדו מפורק",
       "description": "מאוד טעים",
       "image": {
-        "url": "",
-        "alt": ""
-      },
-      "price": "120"
-    },
-    {
-      "title": "אסאדו מפורק",
-      "description": "מאוד טעים",
-      "image": {
-        "url": "",
-        "alt": ""
+        "url": "https://cdn.pixabay.com/photo/2016/01/22/02/13/meat-1155132_1280.jpg",
+        "alt": "rfggtfgfd"
       },
       "price": "120"
     }
   ],
   "users": [
     {
-      "name": {
-        "first": "regular",
-        "last": "user"
-      },
-      "phone": "050-0000000",
+      "name": "regular",
+      "phone": "0548409363",
       "email": "regular1@gmail.com",
-      "password": "Aa1234!",
-      "image": {
-        "url": "",
-        "alt": ""
-      }
+      "password": "Aa1234!"
     },
     {
-      "name": {
-        "first": "business",
-        "last": "user"
-      },
-      "phone": "050-0000000",
-      "email": "business1@gmail.com",
-      "password": "Aa1234!",
-      "image": {
-        "url": "",
-        "alt": ""
-      },
-      "isClient": true
-    },
-    {
-      "name": {
-        "first": "admin",
-        "last": "user"
-      },
-      "phone": "050-0000000",
+      "name": "admin",
+      "phone": "0548409363",
       "email": "admin1@gmail.com",
       "password": "Aa1234!",
-      "image": {
-        "url": "",
-        "alt": ""
-      },
-      "isClient": true,
       "isAdmin": true
     }
   ]

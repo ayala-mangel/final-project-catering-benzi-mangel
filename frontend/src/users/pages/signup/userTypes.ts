@@ -1,17 +1,17 @@
-export type TokenType = { _id: string; isClient: boolean; isAdmin: boolean };
+export type TokenType = {
+  _id: string;
+  /* isClient: boolean; */ isAdmin: boolean;
+};
 
 export type LoginType = { email: string; password: string };
 
 export type SignupType = {
-  fullName: {
-    firstName: string;
-    lastName?: string;
-  };
+  name: string;
   email: string;
   phone: number;
   password: string;
-  imgUrl?: {
+  /* imgUrl?: {
     url: string;
     alt: string;
-  };
+  }; */
 };

@@ -4,7 +4,7 @@ import Button, { ButtonProps } from "@mui/material/Button";
 type Props = {
   variant?: "contained" | "outlined" | "text";
   component?: ElementType<any>;
-  onClick: () => void;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   node: ReactNode;
 };
@@ -16,11 +16,16 @@ const FormButton: FC<Props> & ButtonProps = ({
   onClick,
   disabled = false,
 }) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault(); // Prevent default button behavior
+    onClick(event);
+  };
+
   return (
     <Button
       variant={variant}
       component={component}
-      onClick={onClick}
+      onClick={handleClick}
       disabled={disabled}
       fullWidth
       type="submit"

@@ -4,16 +4,22 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const {
+  generateInitialCards,
+  generateInitialUsers,
+} = require("./initialData/initialDataService");
+const router = require("./router/router");
 
-async function main() {
+/* async function main() {
   await mongoose.connect("mongodb://127.0.0.1:27017/benzi-mangel");
   console.log("mongodb connection established on port 27017");
-}
-main().catch((err) => console.log(err));
+} */
+/* main().catch((err) => console.log(err)); */
 
 app.use(express.json());
+app.use(router);
 
-pp.use(
+app.use(
   cors({
     origin: true,
     credentials: true,
@@ -22,11 +28,18 @@ pp.use(
   })
 );
 
-app.listen(4000, () => {
+app.listen(4000, async () => {
   console.log("Connection to server established on port 4000");
+  await mongoose
+    .connect("mongodb://127.0.0.1:27017/benzi-mangel")
+    .then(() =>
+      console.log("You have been connected to MongoDB Locally successfully!")
+    );
+  await generateInitialCards();
+  await generateInitialUsers();
 });
 
-require("./handlers/users")(app);
+/* require("./handlers/users")(app); */
 /* app.use(express.json());
 
 app.use(

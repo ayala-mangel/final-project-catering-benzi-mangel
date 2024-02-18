@@ -1,7 +1,7 @@
 import ImageInterface from "./ImageInterface";
 
 interface CardInterface {
-  id: string;
+  _id: string;
   title: string;
   description: string;
   price: number;

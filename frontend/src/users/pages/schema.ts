@@ -1,7 +1,7 @@
 export const initialSignupForm = {
-  fullName: "",
-  email: "",
+  name: "",
   phone: "",
+  email: "",
   password: "",
 };
 

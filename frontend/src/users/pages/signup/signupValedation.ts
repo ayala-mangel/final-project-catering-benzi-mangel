@@ -1,14 +1,10 @@
 import Joi from "joi";
 
 const signupValedation = {
-  username: Joi.string()
-    .ruleset.regex(
-      /((?=.*\d{1})(?=.*[A-Z]{1})(?=.*[a-z]{1})(?=.*[!@#$%^&*-]{1}).{7,20})/
-    )
-    .rule({
-      message:
-        'user "username" must be at least seven characters long and contain an uppercase letter, a lowercase letter, a number and one of the following characters !@#$%^&*-',
-    })
+  name: Joi.string().required(),
+  phone: Joi.string()
+    .ruleset.regex(/0[0-9]{1,2}\-?\s?[0-9]{3}\s?[0-9]{4}/)
+    .rule({ message: 'user "phone" mast be a valid phone number' })
     .required(),
   email: Joi.string()
     .ruleset.pattern(/^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/)

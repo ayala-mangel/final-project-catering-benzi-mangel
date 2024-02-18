@@ -115,9 +115,9 @@ const LeftNavBar2 = () => {
           </MenuItem>
         </StyledMenu>
         {user && <NavItem to={ROUTES.CART} label="עגלה" />}
-        {user && user.isClient && (
+        {/*  {user && user.isClient && (
           <NavItem to={ROUTES.ADD_COMMENT} label="הוסף המלצה" />
-        )}
+        )} */}
 
         {user && user.isAdmin && (
           <NavItem to={ROUTES.SANDBOX} label="משתמשים" />

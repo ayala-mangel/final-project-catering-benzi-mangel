@@ -12,9 +12,10 @@ import Router from "./routes/Router";
 import { BrowserRouter } from "react-router-dom";
 import { createTheme } from "@mui/material";
 import ThemeProvider from "./design/ThemeProvider";
-import CardDish from "./cards/components/card/CardDish";
+
 import SignupPage from "./users/pages/signup/SignupPage";
 import { TokenType } from "./users/pages/signup/userTypes";
+import CardsPage from "./pages/CardsPage";
 
 type UserContextValue = {
   user: null | TokenType;

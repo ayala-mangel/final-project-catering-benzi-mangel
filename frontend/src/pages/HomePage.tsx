@@ -9,8 +9,9 @@ import {
 import React from "react";
 import { NavBar2 } from "../layout/header/TopNavBar/NavBar2";
 import Questions from "../components/Questions";
-import CardDish from "../cards/components/card/CardDish";
+
 import CardInterface from "../cards/interfaces/CardInterface";
+import CardsPage from "./CardsPage";
 
 type Props = {
   cards: CardInterface[];
@@ -43,10 +44,7 @@ function HomePage() {
           </Typography>
         </CardContent>
       </Card>
-      <Box>
-        <CardDish />
-        <CardDish />
-      </Box>
+      <CardsPage />
 
       <Questions />
       {/* </Container> */}

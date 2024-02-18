@@ -1,61 +1,19 @@
-import {
-  Box,
-  Container,
-  FormHelperText,
-  Grid,
-  Paper,
-  TextField,
-  Typography,
-} from "@mui/material";
-import React, { useCallback, useMemo, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import { SignupType, TokenType } from "./userTypes";
-import { signup } from "../../api/userApi";
-import { getUser, setTokenInLocalStorage } from "../../api/localStorage";
-import { useUser } from "../../../App";
+import { Box, Container, Paper, Typography } from "@mui/material";
+import { Link, Navigate } from "react-router-dom";
 import ROUTES from "../../../routes/routesModel";
 import useForm from "../../../forms/useForm";
 import { initialSignupForm } from "../schema";
 import signupValedation from "./signupValedation";
-import AppAppBar from "../../../forms/AppAppBar";
+
 import Form from "../../../forms/Form";
 import Input from "../../../forms/Input";
+import useHandleUser from "../../hooks/useHandleUser";
 
-type ErrorType = null | string;
-
-function SignupPage() {
-  const [sent, setSent] = React.useState(false);
-  const [isLoading, setLoading] = useState(false);
-  const { setUser, setToken, user } = useUser();
-  const [error, setError] = useState<ErrorType>(null);
-  const navigate = useNavigate();
-
-  const requestStatus = (
-    loading: boolean,
-    errorMessage: ErrorType,
-    user: null | TokenType
-  ) => {
-    setLoading(loading);
-    setError(errorMessage);
-    setUser(user);
-  };
-
-  const handleSignup = useCallback(
-    async (user: SignupType) => {
-      try {
-        setLoading(true);
-        const token = await signup(user);
-        setTokenInLocalStorage(token);
-        setToken(token);
-        const userFromLocalStorage = getUser();
-        requestStatus(false, null, userFromLocalStorage);
-        navigate(ROUTES.ROOT);
-      } catch (error) {
-        if (typeof error === "string") requestStatus(false, error, null);
-      }
-    },
-    [setToken]
-  );
+const SignupPage = () => {
+  const {
+    handleSignup,
+    value: { user },
+  } = useHandleUser();
 
   /*  const {
     value = () => {
@@ -102,10 +60,10 @@ function SignupPage() {
             onFormChange={validateForm}
           >
             <Input
-              label="First name"
-              name="firstName"
+              label="name"
+              name="name"
               data={data}
-              error={errors.fullName}
+              error={errors.name}
               onInputChange={handleInputChange}
             />
 
@@ -140,6 +98,6 @@ function SignupPage() {
       </Box>
     </Container>
   );
-}
+};
 
 export default SignupPage;
