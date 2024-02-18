@@ -15,20 +15,21 @@ const router = require("./router/router");
   console.log("mongodb connection established on port 27017");
 } */
 /* main().catch((err) => console.log(err)); */
-
-app.use(express.json());
-app.use(router);
-
 app.use(
   cors({
-    origin: true,
+    origin: "http://localhost:3000",
     credentials: true,
     methods: "GET,PUT,POST,DELETE",
     allowedHeaders: "Content-Type, Accept, Authorization",
   })
 );
 
-app.listen(4000, async () => {
+app.use(express.json());
+app.use(router);
+
+const PORT = 4000;
+
+app.listen(PORT, async () => {
   console.log("Connection to server established on port 4000");
   await mongoose
     .connect("mongodb://127.0.0.1:27017/benzi-mangel")

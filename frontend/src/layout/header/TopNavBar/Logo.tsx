@@ -17,6 +17,7 @@ const Logo = () => {
         navigate(`${ROUTES.ROOT}`);
       }}
       sx={{
+        color: "#BF1E2E",
         display: { xs: "none", md: "inline-flex" },
         marginRight: 2,
         fontFamily: "fantasy",

@@ -5,7 +5,6 @@ import { NavBar2 } from "./TopNavBar/NavBar2";
 const Header = () => {
   return (
     <>
-      <NavBar />
       <NavBar2 />
     </>
   );

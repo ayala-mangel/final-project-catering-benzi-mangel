@@ -18,37 +18,43 @@ type Props = {
 };
 
 function HomePage() {
-  const video = "https://assets.codepen.io/6093409/river.mp4";
+  const video = "https://www.kapwing.com/videos/65d2915170577fe8f672efbb";
   return (
-    <Box sx={{ gap: 2 }}>
-      {/*  <Container> */}
-      <Card>
-        <CardMedia>
-          <video
+    <Container>
+      <Box sx={{ gap: 2 }}>
+        {/*  <Container> */}
+        <Card>
+          <CardMedia
+            component="img"
+            image="https://cdn.pixabay.com/photo/2016/01/22/02/13/meat-1155132_1280.jpg"
+            sx={{ height: 700, aspectRatio: "16/9", objectFit: "cover" }}
+          >
+            {/* <video
             autoPlay
             loop
             muted
-            poster="https://onedrive.live.com/embed?resid=E8F337FA0BC6A87B%21339&authkey=!ADDSidwMwiVc2Eo"
-            src={video}
-          />
-          {/*   <source src={video} type="video/mp4" /> */}
-        </CardMedia>
-        <CardContent>
+            poster="https://cdn.pixabay.com/photo/2016/01/22/02/13/meat-1155132_1280.jpg"
+            src={video} 
+          /> */}
+            {/*   <source src={video} type="video/mp4" /> */}
+          </CardMedia>
+          {/* <CardContent>
           <Typography
-            //level="body-lg"
+            
             fontWeight="lg"
-            // textColor="#fff"
+            
             mt={{ xs: 12, sm: 18 }}
           >
             Video
           </Typography>
-        </CardContent>
-      </Card>
-      <CardsPage />
+        </CardContent> */}
+        </Card>
+        <CardsPage />
 
-      <Questions />
-      {/* </Container> */}
-    </Box>
+        <Questions />
+        {/* </Container> */}
+      </Box>
+    </Container>
   );
 }
 
