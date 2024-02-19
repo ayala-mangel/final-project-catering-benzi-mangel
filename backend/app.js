@@ -9,6 +9,26 @@ const {
   generateInitialUsers,
 } = require("./initialData/initialDataService");
 const router = require("./router/router");
+const multer = require("multer");
+const path = require("path");
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({ storage: storage });
+
+app.post("/upload", upload.single("image"), (req, res) => {
+  // Handle the uploaded file, for example, save the file path to a database
+  const filePath = req.file.path;
+  // Respond with a success message or appropriate data
+  res.json({ success: true, message: "File uploaded successfully", filePath });
+});
 
 /* async function main() {
   await mongoose.connect("mongodb://127.0.0.1:27017/benzi-mangel");

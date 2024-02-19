@@ -30,7 +30,12 @@ const createCard = async (req, res) => {
     if (error)
       return handleError(res, 400, `Joi Error: ${error.details[0].message}`);
 
-    const normalizedCard = normalizeCard(card, user._id);
+    let imagePath = null;
+    if (req.file) {
+      imagePath = req.file.path;
+    }
+
+    const normalizedCard = normalizeCard(card, user._id, imagePath);
 
     const cardToDB = new Card(normalizedCard);
     const cardFromDB = await cardToDB.save();

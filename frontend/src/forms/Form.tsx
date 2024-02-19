@@ -63,7 +63,7 @@ const Form: FC<Props> = ({
       <Grid container spacing={1} my={2} direction="row" width="100">
         <FormButton
           node="Submit"
-          onClick={() => navigate(`${ROUTES.ROOT}/${ROUTES.USER_PROFILE}`)}
+          onClick={onSubmit}
           disabled={!!onFormChange()}
           //  size="large"
         />

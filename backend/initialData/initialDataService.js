@@ -27,7 +27,6 @@ const generateInitialCards = async () => {
 
 const generateInitialUsers = async () => {
   const { users } = data;
-
   users.forEach(async (user) => {
     try {
       const { error } = registerValidation(user);

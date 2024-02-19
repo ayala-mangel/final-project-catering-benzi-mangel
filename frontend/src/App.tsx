@@ -73,26 +73,28 @@ function App() {
   /* const [roleType, setRoleType] = useState<number>(RoleTypes.none); */
 
   return (
-    <BrowserRouter>
-      <ThemeProvider>
-        <UserContext.Provider
-          value={{
-            user,
-            setUser,
-            token,
-            setToken,
-            /* searchWord,
+    <div className="App">
+      <BrowserRouter>
+        <ThemeProvider>
+          <UserContext.Provider
+            value={{
+              user,
+              setUser,
+              token,
+              setToken,
+              /* searchWord,
         setSearchWord, */
-            /* roleType,
+              /* roleType,
         setRoleType, */
-          }}
-        >
-          <Header />
+            }}
+          >
+            <Header />
 
-          <Router />
-        </UserContext.Provider>
-      </ThemeProvider>
-    </BrowserRouter>
+            <Router />
+          </UserContext.Provider>
+        </ThemeProvider>
+      </BrowserRouter>
+    </div>
   );
 }
 
