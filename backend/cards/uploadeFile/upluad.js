@@ -1,4 +1,4 @@
-const express = require("express");
+/* const express = require("express");
 const cors = require("cors");
 const formidable = require("formidable");
 const fs = require("fs");
@@ -23,3 +23,4 @@ app.post("/upload", upload.single("image"), (req, res) => {
   // Respond with a success message or appropriate data
   res.json({ success: true, message: "File uploaded successfully", filePath });
 });
+ */

@@ -1,7 +1,5 @@
 const express = require("express");
 const app = express();
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const {
@@ -9,32 +7,18 @@ const {
   generateInitialUsers,
 } = require("./initialData/initialDataService");
 const router = require("./router/router");
-const multer = require("multer");
-const path = require("path");
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/");
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
-
-const upload = multer({ storage: storage });
-
-app.post("/upload", upload.single("image"), (req, res) => {
-  // Handle the uploaded file, for example, save the file path to a database
-  const filePath = req.file.path;
-  // Respond with a success message or appropriate data
-  res.json({ success: true, message: "File uploaded successfully", filePath });
-});
 
 /* async function main() {
   await mongoose.connect("mongodb://127.0.0.1:27017/benzi-mangel");
   console.log("mongodb connection established on port 27017");
 } */
 /* main().catch((err) => console.log(err)); */
+
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("Unhandled Rejection at:", promise, "reason:", reason);
+  // Handle the error or log it as needed
+});
+
 app.use(
   cors({
     origin: "http://localhost:3000",

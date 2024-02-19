@@ -41,7 +41,11 @@ const createCard = async (req, res) => {
     const cardFromDB = await cardToDB.save();
     res.send(cardFromDB);
   } catch (error) {
-    return handleError(res, 500, `Mongoose Error: ${error.message}`);
+    console.error("Error creating card:", error);
+    return handleError(res, 500, {
+      error: "Internal Server Error",
+      details: error.message,
+    });
   }
 };
 

@@ -23,7 +23,7 @@ const regexType = (regex, required = true, unique = false) => {
 };
 
 const imageSchema = new mongoose.Schema({
-  url: regexType(URL_REGEX),
+  url: String /* regexType(URL_REGEX) */,
   alt: DEFAULT_VALIDATION,
 });
 
