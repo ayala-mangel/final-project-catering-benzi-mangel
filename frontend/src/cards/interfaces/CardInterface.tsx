@@ -5,6 +5,6 @@ interface CardInterface {
   title: string;
   description: string;
   price: number;
-  image: ImageInterface;
+  image: File | ImageInterface | null;
 }
 export default CardInterface;

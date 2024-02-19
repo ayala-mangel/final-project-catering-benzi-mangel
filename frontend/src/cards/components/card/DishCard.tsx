@@ -1,10 +1,10 @@
-import { Box, Button, Card, Link, Stack, Typography } from "@mui/material";
-import React, { useState } from "react";
+import { Box, Card, Link, Stack, Typography } from "@mui/material";
+import React from "react";
 import ColorPreview from "../../design/ColorPreview";
 import CardInterface from "../../interfaces/CardInterface";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../../routes/routesModel";
-import axios from "axios";
+import ImageInterface from "../../interfaces/ImageInterface";
 
 type Props = {
   card: CardInterface;
@@ -14,50 +14,36 @@ type Props = {
 const DishCard: React.FC<Props> = ({ card, onDelete }) => {
   const navigate = useNavigate();
 
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [uploadStatus, setUploadStatus] = useState<
-    "idle" | "loading" | "success" | "error"
-  >("idle");
-  const [uploadedFilePath, setUploadedFilePath] = useState<string | null>(null);
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setSelectedFile(e.target.files[0]);
+  const getImageAlt = (
+    image: File | ImageInterface | null | undefined
+  ): string => {
+    if (image instanceof File) {
+      return "Alt Text for File";
+    } else if (image) {
+      return image.alt;
+    } else {
+      return "Default Alt Text";
     }
   };
 
-  const handleUpload = async () => {
-    if (!selectedFile) return;
-
-    setUploadStatus("loading");
-
-    const formData = new FormData();
-    formData.append("image", selectedFile);
-
-    try {
-      const response = await axios.post(
-        "http://localhost:4000/upload",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      setUploadStatus("success");
-      setUploadedFilePath(response.data.filePath);
-    } catch (error) {
-      console.error("Error uploading image:", error);
-      setUploadStatus("error");
+  const getImageUrl = (
+    image: File | ImageInterface | null | undefined
+  ): string => {
+    if (image instanceof File) {
+      // Handle the case for File, e.g., return a default URL or leave it empty
+      return "default-placeholder-url.jpg";
+    } else if (image) {
+      return image.url;
+    } else {
+      return "Default Image URL";
     }
   };
 
   const renderImg = (
     <Box
       component="img"
-      alt={card.image.alt}
-      src={uploadedFilePath || card.image.url}
+      alt={getImageAlt(card.image)}
+      src={getImageUrl(card.image)}
       sx={{
         top: 0,
         width: 1,
@@ -76,38 +62,14 @@ const DishCard: React.FC<Props> = ({ card, onDelete }) => {
         boxShadow:
           "rgba(145, 158, 171, 0.08) 0px 2px 1px -1px rgba(0,0,0,0), 0px 1px 1px 0px rgba(0,0,0,0), 0px 1px 3px 0px rgba(0,0,0,0)",
       }}
+      onClick={() => navigate(`${ROUTES.DISH_DETAILS}/${card._id}`)}
     >
       <Box sx={{ pt: "100%", position: "relative" }}>{renderImg}</Box>
 
       <Stack spacing={2} sx={{ p: 3 }}>
-        <Link
-          color="inherit"
-          underline="hover"
-          variant="subtitle2"
-          onClick={() => navigate(`${ROUTES.DISH_DETAILS}/${card._id}`)}
-          noWrap
-        >
+        <Link color="inherit" underline="hover" variant="subtitle2" noWrap>
           {card.title}
         </Link>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleFileChange}
-          style={{ display: "none" }} // Hide the input but trigger it when the button is clicked
-          id={`upload-input-${card._id}`}
-        />
-        <label htmlFor={`upload-input-${card._id}`}>
-          <Button variant="outlined" color="primary" component="span">
-            Upload Image
-          </Button>
-        </label>
-        <Button
-          variant="outlined"
-          color="error"
-          onClick={() => onDelete(card._id)}
-        >
-          Delete
-        </Button>
         <Typography variant="subtitle1">{card.description}</Typography>
         <Stack
           direction="row"

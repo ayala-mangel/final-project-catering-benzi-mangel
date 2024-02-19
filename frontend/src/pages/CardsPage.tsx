@@ -6,6 +6,7 @@ import { useCards } from "../cards/hooks/useCards";
 
 import { ProductSort } from "../cards/components/filters/ProductSort";
 import { ProductFilters } from "../cards/components/filters/ProductFilters";
+import AddCard from "../cards/admin/AddCard";
 
 type OpenValue = {
   openFilter: boolean;
@@ -13,8 +14,14 @@ type OpenValue = {
 };
 
 const CardsPage = () => {
-  const { cards, error, isLoading, handleGetCards } = useCards();
+  const { cards, card, error, isLoading, handleGetCards } = useCards();
   const [openFilter, setOpenFilter] = useState(false);
+  // const [cards, setCards] = useState<any[]>([]);
+
+  const handleAddCard = (newCard: any) => {
+    //setCards((prevCards) => [...prevCards, newCard]);
+    handleGetCards();
+  };
 
   const handleOpenFilter = () => {
     setOpenFilter(true);
@@ -51,6 +58,7 @@ const CardsPage = () => {
         </Stack>
       </Stack>
       <CardsFeedback isLoading={isLoading} error={error} cards={cards} />
+      <AddCard onAddCard={handleAddCard} />
     </Container>
   );
 };

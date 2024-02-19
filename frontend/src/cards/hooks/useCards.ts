@@ -59,6 +59,7 @@ export const useCards = () => {
     error,
     cards,
     card,
+    setCards,
     handleGetCards,
     handleGetCard,
     handleLikeCard,
