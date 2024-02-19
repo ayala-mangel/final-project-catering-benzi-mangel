@@ -4,6 +4,7 @@ import React, { CSSProperties, FC, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import FormButton from "./FormButton";
 import LoopIcon from "@mui/icons-material/Loop";
+import ROUTES from "../routes/routesModel";
 
 type Props = {
   title?: string;
@@ -62,7 +63,7 @@ const Form: FC<Props> = ({
       <Grid container spacing={1} my={2} direction="row" width="100">
         <FormButton
           node="Submit"
-          onClick={onSubmit}
+          onClick={() => navigate(`${ROUTES.ROOT}/${ROUTES.USER_PROFILE}`)}
           disabled={!!onFormChange()}
           //  size="large"
         />

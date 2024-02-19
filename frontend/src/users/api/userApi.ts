@@ -14,7 +14,7 @@ export const login = async (user: LoginType) => {
 };
 export const signup = async (user: SignupType) => {
   try {
-    const { data } = await axios.post<string>(`${apiUrl}/signup`, user);
+    const { data } = await axios.post<string>(`${apiUrl}/users/signup`, user);
     return Promise.resolve(data);
   } catch (error) {
     if (axios.isAxiosError(error)) return Promise.reject(error.message);

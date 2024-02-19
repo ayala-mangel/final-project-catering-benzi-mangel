@@ -28,14 +28,22 @@ const DishCard: React.FC<Props> = ({ card, onDelete }) => {
   );
 
   return (
-    <Card onClick={() => navigate(`${ROUTES.DISH_DETAILS}/${card._id}`)}>
+    <Card
+      sx={{
+        borderRadius: "16px",
+        bgcolor: "rgb(255, 255, 255)",
+        boxShadow:
+          "rgba(145, 158, 171, 0.08) 0px 2px 1px -1px rgba(0,0,0,0), 0px 1px 1px 0px rgba(0,0,0,0), 0px 1px 3px 0px rgba(0,0,0,0)",
+      }}
+      onClick={() => navigate(`${ROUTES.DISH_DETAILS}/${card._id}`)}
+    >
       <Box sx={{ pt: "100%", position: "relative" }}>{renderImg}</Box>
 
       <Stack spacing={2} sx={{ p: 3 }}>
         <Link color="inherit" underline="hover" variant="subtitle2" noWrap>
           {card.title}
         </Link>
-
+        <Typography variant="subtitle1">{card.description}</Typography>
         <Stack
           direction="row"
           alignItems="center"
@@ -48,10 +56,10 @@ const DishCard: React.FC<Props> = ({ card, onDelete }) => {
               variant="body1"
               sx={{
                 color: "text.disabled",
-                textDecoration: "line-through",
+                // textDecoration: "line-through",
               }}
             >
-              price
+              price:{" "}
             </Typography>
             {card.price}
           </Typography>

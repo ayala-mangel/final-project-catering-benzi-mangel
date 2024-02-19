@@ -17,7 +17,7 @@ const FormButton: FC<Props> & ButtonProps = ({
   disabled = false,
 }) => {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault(); // Prevent default button behavior
+    event.preventDefault();
     onClick(event);
   };
 
