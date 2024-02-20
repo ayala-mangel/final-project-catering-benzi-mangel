@@ -1,12 +1,12 @@
 import { SetStateAction, useEffect, useState } from "react";
 
 import { Container, Stack, Typography } from "@mui/material";
-import CardsFeedback from "../cards/components/CardsFeedback";
-import { useCards } from "../cards/hooks/useCards";
+import CardsFeedback from "../components/CardsFeedback";
+import { useCards } from "../hooks/useCards";
 
-import { ProductSort } from "../cards/components/filters/ProductSort";
-import { ProductFilters } from "../cards/components/filters/ProductFilters";
-import AddCard from "../cards/admin/AddCard";
+import { ProductSort } from "../components/filters/ProductSort";
+import { ProductFilters } from "../components/filters/ProductFilters";
+import AddCard from "../admin/AddCard";
 
 type OpenValue = {
   openFilter: boolean;

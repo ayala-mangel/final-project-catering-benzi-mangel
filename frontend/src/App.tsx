@@ -15,7 +15,8 @@ import ThemeProvider from "./design/ThemeProvider";
 
 import SignupPage from "./users/pages/signup/SignupPage";
 import { TokenType } from "./users/pages/signup/userTypes";
-import CardsPage from "./pages/CardsPage";
+import { MenuProvider } from "./layout/header/TopNavBar/MenuProvider";
+//import CardsPage from "./pages/CardsPage";
 
 type UserContextValue = {
   user: null | TokenType;
@@ -88,9 +89,11 @@ function App() {
         setRoleType, */
             }}
           >
-            <Header />
+            <MenuProvider>
+              <Header />
 
-            <Router />
+              <Router />
+            </MenuProvider>
           </UserContext.Provider>
         </ThemeProvider>
       </BrowserRouter>

@@ -1,10 +1,12 @@
 import React, { ElementType, FC, ReactNode } from "react";
 import Button, { ButtonProps } from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "../routes/routesModel";
 
 type Props = {
   variant?: "contained" | "outlined" | "text";
   component?: ElementType<any>;
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   node: ReactNode;
 };
@@ -16,10 +18,13 @@ const FormButton: FC<Props> & ButtonProps = ({
   onClick,
   disabled = false,
 }) => {
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    onClick(event);
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    onClick(e);
+    navigate(`${ROUTES.LOGIN}`);
   };
+
+  const navigate = useNavigate();
 
   return (
     <Button

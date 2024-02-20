@@ -11,7 +11,7 @@ import { NavBar2 } from "../layout/header/TopNavBar/NavBar2";
 import Questions from "../components/Questions";
 
 import CardInterface from "../cards/interfaces/CardInterface";
-import CardsPage from "./CardsPage";
+import CardsPage from "../cards/pages/CardsPage";
 
 type Props = {
   cards: CardInterface[];

@@ -1,9 +1,21 @@
 import React, { useState } from "react";
 import CardInterface from "../interfaces/CardInterface";
 import axios from "axios";
-import { Box, Button, TextField } from "@mui/material";
-import { string } from "joi";
+import {
+  Box,
+  Button,
+  Container,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
+import Joi, { PartialSchemaMap, string } from "joi";
 import ImageInterface from "../interfaces/ImageInterface";
+import Form from "../../forms/Form";
+import Input from "../../forms/Input";
+import useForm from "../../forms/useForm";
+import { initialCardForm } from "../../users/pages/schema";
+import { useCards } from "../hooks/useCards";
 
 type Props = {
   onAddCard: (newCard: any) => void;
@@ -21,12 +33,18 @@ const AddCard: React.FC<Props> = ({ onAddCard, card }) => {
     }
   );
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  const schema: PartialSchemaMap<any> = {
+    title: Joi.string().required(),
+    description: Joi.string().required(),
+    price: Joi.number().required(),
   };
+
+  const { handleAddCard } = useCards();
+
+  const { value, ...rest } = useForm(initialCardForm, schema, handleAddCard);
+
+  const { data, errors } = value;
+  const { handleInputChange, handleReset, onSubmit, validateForm } = rest;
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -38,71 +56,71 @@ const AddCard: React.FC<Props> = ({ onAddCard, card }) => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    try {
-      const cardData = new FormData();
-      cardData.append("title", formData.title);
-      cardData.append("description", formData.description);
-      cardData.append("price", formData.price.toString());
-      if (formData.image !== null) {
-        cardData.append("image", formData.image as File);
-      }
-
-      const response = await axios.post(
-        "http://localhost:4000/cards",
-        cardData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      onAddCard(response.data); // Assuming the server responds with the newly added card
-    } catch (error) {
-      console.error("Error adding card:", error);
-    }
-  };
-
   return (
-    <Box>
-      <form onSubmit={handleSubmit}>
-        <TextField
-          label="Title"
-          name="title"
-          value={formData.title}
-          onChange={handleInputChange}
-          required
-        />
-        <TextField
-          label="Description"
-          name="description"
-          value={formData.description}
-          onChange={handleInputChange}
-          multiline
-          required
-        />
-        <TextField
-          label="Price"
-          name="price"
-          value={formData.price}
-          onChange={handleInputChange}
-          type="number"
-          required
-        />
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-          required
-        />
-        <Button type="submit" variant="contained" color="primary">
-          Add Card
-        </Button>
-      </form>
-    </Box>
+    <Container maxWidth="sm">
+      <Box sx={{ mt: 7, mb: 12 }}>
+        <Paper
+          sx={{
+            py: { xs: 4, md: 8 },
+            px: { xs: 3, md: 6 },
+            bgcolor: "#fff5f8",
+          }}
+        >
+          <Typography
+            variant="h3"
+            gutterBottom
+            // marked="center"
+            align="center"
+          >
+            הוסף מנה
+          </Typography>
+          <Form
+            onSubmit={onSubmit}
+            onReset={handleReset}
+            onFormChange={validateForm}
+          >
+            <Input
+              label="Title"
+              name="title"
+              data={data}
+              error={errors.title}
+              //value={formData.title}
+              onInputChange={handleInputChange}
+              // required
+            />
+            <Input
+              label="Description"
+              name="description"
+              data={data}
+              // value={formData.description}
+              error={errors.description}
+              onInputChange={handleInputChange}
+              // multiline
+              //required
+            />
+            <Input
+              label="Price"
+              name="price"
+              data={data}
+              // data={formData.price}
+              error={errors.price}
+              onInputChange={handleInputChange}
+              //type="number"
+              required
+            />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              //required
+            />
+            {/* <Button type="submit" variant="contained" color="primary">
+              Add Card
+            </Button> */}
+          </Form>
+        </Paper>
+      </Box>
+    </Container>
   );
 };
 

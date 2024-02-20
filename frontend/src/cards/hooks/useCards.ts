@@ -1,16 +1,28 @@
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import CardInterface from "../interfaces/CardInterface";
-import { changeLikeStatus, getCard, getCards } from "./cardApi";
+import { addCard, changeLikeStatus, getCard, getCards } from "./cardApi";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "../../routes/routesModel";
 
 type ErrorType = null | string;
 type CardsType = null | CardInterface[];
-type CardType = null | CardInterface;
+export type CardType =
+  | CardInterface
+  | {
+      _id: "";
+      title: "";
+      description: "";
+      price: 0;
+      image: null;
+    }
+  | null;
 
 export const useCards = () => {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<ErrorType>(null);
   const [cards, setCards] = useState<CardsType>(null);
   const [card, setCard] = useState<CardType>(null);
+  const navigate = useNavigate();
 
   const requestStatus = (
     loading: boolean,
@@ -22,6 +34,17 @@ export const useCards = () => {
     setError(errorMessage);
     setCards(cards);
     setCard(card);
+  };
+
+  const handleAddCard = async (card: CardType) => {
+    try {
+      setLoading(true);
+      const cardData = await addCard(card);
+      requestStatus(false, null, null, cardData);
+      navigate(ROUTES.DISH);
+    } catch (error) {
+      if (typeof error === "string") requestStatus(false, error, null, null);
+    }
   };
 
   const handleGetCards = async () => {
@@ -60,6 +83,7 @@ export const useCards = () => {
     cards,
     card,
     setCards,
+    handleAddCard,
     handleGetCards,
     handleGetCard,
     handleLikeCard,
