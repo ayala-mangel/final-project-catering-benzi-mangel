@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import MenuLink from "./MenuLink";
 import { useUser } from "../../../App";
 import ROUTES from "../../../routes/routesModel";
+import useHandleUser from "../../../users/hooks/useHandleUser";
 /* import useHandleUsers from "../../../../users/hooks/useHandleUsers"; */
 
 type Props = {
@@ -14,10 +15,10 @@ type Props = {
 
 const Menu: React.FC<Props> = ({ isOpen, anchorEl, onClose }) => {
   const { user } = useUser();
-  /* const { handleLogout } = useHandleUsers(); */
+  const { handleLogout } = useHandleUser();
 
   const onLogout = () => {
-    /* handleLogout(); */
+    handleLogout();
     onClose();
   };
 
