@@ -42,6 +42,15 @@ const createCard = async (req, res) => {
     res.send(cardFromDB);
   } catch (error) {
     console.error("Error creating card:", error);
+
+    let errorMessage = "Internal Server Error";
+    let errorDetails = null;
+
+    if (error instanceof Error) {
+      errorMessage = error.message;
+      errorDetails = error.stack;
+    }
+
     return handleError(res, 500, {
       error: "Internal Server Error",
       details: error.message,

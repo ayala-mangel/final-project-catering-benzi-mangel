@@ -43,7 +43,18 @@ export const useCards = () => {
       requestStatus(false, null, null, cardData);
       navigate(ROUTES.DISH);
     } catch (error) {
-      if (typeof error === "string") requestStatus(false, error, null, null);
+      console.error("Error adding card:", error);
+      if (typeof error === "string") {
+        requestStatus(false, error, null, null);
+      } else {
+        // Handle other types of errors, log them, or display a generic error message.
+        requestStatus(
+          false,
+          "An error occurred while adding the card.",
+          null,
+          null
+        );
+      }
     }
   };
 
