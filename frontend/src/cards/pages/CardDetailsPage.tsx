@@ -12,7 +12,7 @@ const CardDetailsPage = () => {
 
   useEffect(() => {
     if (cardId) handleGetCard(cardId);
-  }, []);
+  }, [cardId]);
 
   if (isLoading) return <Spinner />;
   if (error) return <Error errorMessage={error} />;

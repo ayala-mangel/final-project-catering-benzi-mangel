@@ -16,6 +16,7 @@ import ThemeProvider from "./design/ThemeProvider";
 import SignupPage from "./users/pages/signup/SignupPage";
 import { TokenType } from "./users/pages/signup/userTypes";
 import { MenuProvider } from "./layout/header/TopNavBar/MenuProvider";
+import Footer from "./layout/footer/Footer";
 //import CardsPage from "./pages/CardsPage";
 
 type UserContextValue = {
@@ -93,6 +94,7 @@ function App() {
               <Header />
 
               <Router />
+              <Footer />
             </MenuProvider>
           </UserContext.Provider>
         </ThemeProvider>

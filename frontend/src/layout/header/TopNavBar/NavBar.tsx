@@ -13,7 +13,7 @@ export const NavBar = () => {
       <AppBar
         position="static"
         sx={{
-          bgcolor: "black",
+          bgcolor: "rgba(255, 255, 255,0.4)",
         }}
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -27,11 +27,11 @@ export const NavBar = () => {
           >
             <LeftNavBar />
 
-            {/*  <Box sx={{ display: { xs: "inline-flex", md: "none" } }}>
+            <Box sx={{ display: { xs: "inline-flex", md: "none" } }}>
               <SearchBar />
             </Box>
 
-            <RightNavBar /> */}
+            <RightNavBar />
           </Box>
         </Toolbar>
       </AppBar>
