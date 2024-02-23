@@ -46,6 +46,17 @@ const useForm = <TForm extends Record<string, unknown>>(
     [validateProperty]
   );
 
+  const handleImageChange = useCallback(
+    ({ target }: ChangeEvent<HTMLInputElement>) => {
+      const { name, files } = target;
+      if (files && files.length > 0) {
+        const file = files[0];
+        setData((prev) => ({ ...prev, [name]: file }));
+      }
+    },
+    []
+  );
+
   const validateForm = useCallback(() => {
     const schemaForValidate = Joi.object(schema);
     const { error } = schemaForValidate.validate(data);
@@ -63,6 +74,7 @@ const useForm = <TForm extends Record<string, unknown>>(
 
   return {
     value,
+    handleImageChange,
     onSubmit,
     handleInputChange,
     handleReset,

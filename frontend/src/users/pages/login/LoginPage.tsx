@@ -2,11 +2,12 @@ import ROUTES from "../../../routes/routesModel";
 import useForm from "../../../forms/useForm";
 import { initialLoginForm } from "../schema";
 import loginValedation from "./loginValedation";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Form from "../../../forms/Form";
 import { Box, Container, Paper, Typography } from "@mui/material";
 import Input from "../../../forms/Input";
 import useHandleUser from "../../hooks/useHandleUser";
+import FormLink from "../../../forms/FormLink";
 
 const LoginPage = () => {
   const {
@@ -34,22 +35,13 @@ const LoginPage = () => {
             bgcolor: "#fff5f8",
           }}
         >
-          <Typography
-            variant="h3"
-            gutterBottom
-            // marked="center"
-            align="center"
-          >
-            התחברות
-          </Typography>
-          <Typography variant="body2" align="center">
-            <Link title="Did not registered yet?" to={ROUTES.LOGIN} />
-          </Typography>
           <Form
+            title="התחברות"
             onSubmit={onSubmit}
             onReset={handleReset}
             onFormChange={validateForm}
           >
+            <FormLink text="Did not registered yet?" to={ROUTES.SIGNUP} />
             <Input
               label="email"
               name="email"

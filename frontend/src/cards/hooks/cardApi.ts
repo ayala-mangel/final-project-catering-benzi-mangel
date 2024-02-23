@@ -29,15 +29,39 @@ export const getCard = async (cardId: string) => {
 
 export const addCard = async (card: CardType) => {
   try {
-    const { data } = await axios.post<CardInterface>(`${apiUrl}/cards`, card, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    if (!card || !card._id) {
+      throw new Error("Invalid card object or missing _id property");
+      /* const { _id, ...cardData } = card;
+      const { data } = await axios.post<CardInterface>(
+        `${apiUrl}/cards`,
+        cardData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return Promise.resolve(data); */
+    }
+    const { data } = await axios.post<CardInterface>(
+      `${apiUrl}/cards/${card._id}`,
+      card,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
     return Promise.resolve(data);
   } catch (error) {
-    if (axios.isAxiosError(error)) return Promise.reject(error.message);
-    return Promise.reject("An unexpected error occurred!");
+    console.error("Error adding card:", error);
+    if (axios.isAxiosError(error)) {
+      return Promise.reject(error.message);
+    } else {
+      return Promise.reject("An unexpected error occurred!");
+    }
+    /* if (axios.isAxiosError(error)) return Promise.reject(error.message);
+    return Promise.reject("An unexpected error occurred!"); */
   }
 };
 

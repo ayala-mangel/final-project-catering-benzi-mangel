@@ -18,8 +18,11 @@ const getCard = (req, res) => {
 
 const createCard = async (req, res) => {
   try {
+    console.log("Incoming card data:", req.body);
     const card = req.body;
     const user = req.user;
+
+    console.log("User:", user);
 
     if (!user.isAdmin)
       throw new Error(
@@ -30,27 +33,18 @@ const createCard = async (req, res) => {
     if (error)
       return handleError(res, 400, `Joi Error: ${error.details[0].message}`);
 
-    let imagePath = null;
+    let image = null;
     if (req.file) {
-      imagePath = req.file.path;
+      image = req.file.path;
     }
 
-    const normalizedCard = normalizeCard(card, user._id, imagePath);
+    const normalizedCard = normalizeCard(card, user._id, image);
 
     const cardToDB = new Card(normalizedCard);
     const cardFromDB = await cardToDB.save();
     res.send(cardFromDB);
   } catch (error) {
     console.error("Error creating card:", error);
-
-    let errorMessage = "Internal Server Error";
-    let errorDetails = null;
-
-    if (error instanceof Error) {
-      errorMessage = error.message;
-      errorDetails = error.stack;
-    }
-
     return handleError(res, 500, {
       error: "Internal Server Error",
       details: error.message,

@@ -8,6 +8,7 @@ import signupValedation from "./signupValedation";
 import Form from "../../../forms/Form";
 import Input from "../../../forms/Input";
 import useHandleUser from "../../hooks/useHandleUser";
+import FormLink from "../../../forms/FormLink";
 
 const SignupPage = () => {
   const {
@@ -43,22 +44,13 @@ const SignupPage = () => {
             bgcolor: "#fff5f8",
           }}
         >
-          <Typography
-            variant="h3"
-            gutterBottom
-            // marked="center"
-            align="center"
-          >
-            הרשמה
-          </Typography>
-          <Typography variant="body2" align="center">
-            <Link title="Did not registered yet?" to={ROUTES.LOGIN} />
-          </Typography>
           <Form
+            title="הרשמה"
             onSubmit={onSubmit}
             onReset={handleReset}
             onFormChange={validateForm}
           >
+            <FormLink text="Did not registered yet?" to={ROUTES.LOGIN} />
             <Input
               label="name"
               name="name"

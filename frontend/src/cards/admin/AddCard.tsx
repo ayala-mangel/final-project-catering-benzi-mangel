@@ -16,6 +16,8 @@ import Input from "../../forms/Input";
 import useForm from "../../forms/useForm";
 import { initialCardForm } from "../../users/pages/schema";
 import { useCards } from "../hooks/useCards";
+import InputImage from "../../forms/InputImage";
+import { useUser } from "../../App";
 
 type Props = {
   onAddCard: (newCard: any) => void;
@@ -23,15 +25,7 @@ type Props = {
 };
 
 const AddCard: React.FC<Props> = ({ onAddCard, card }) => {
-  const [formData, setFormData] = useState<CardInterface>(
-    card || {
-      _id: "",
-      title: "",
-      description: "",
-      price: 0,
-      image: null,
-    }
-  );
+  const { user } = useUser();
 
   const schema: PartialSchemaMap<any> = {
     title: Joi.string().required(),
@@ -44,17 +38,23 @@ const AddCard: React.FC<Props> = ({ onAddCard, card }) => {
   const { value, ...rest } = useForm(initialCardForm, schema, handleAddCard);
 
   const { data, errors } = value;
-  const { handleInputChange, handleReset, onSubmit, validateForm } = rest;
+  const {
+    handleInputChange,
+    handleReset,
+    onSubmit,
+    validateForm,
+    handleImageChange,
+  } = rest;
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const selectedFile = e.target.files[0];
-      setFormData((prevData) => ({
-        ...prevData,
-        image: selectedFile,
-      }));
-    }
-  };
+  if (!user || !user.isAdmin) {
+    return (
+      <div>
+        <Typography variant="h5">
+          You do not have permission to add cards.
+        </Typography>
+      </div>
+    );
+  }
 
   return (
     <Container maxWidth="sm">
@@ -66,15 +66,8 @@ const AddCard: React.FC<Props> = ({ onAddCard, card }) => {
             bgcolor: "#fff5f8",
           }}
         >
-          <Typography
-            variant="h3"
-            gutterBottom
-            // marked="center"
-            align="center"
-          >
-            הוסף מנה
-          </Typography>
           <Form
+            title="הוסף מנה"
             onSubmit={onSubmit}
             onReset={handleReset}
             onFormChange={validateForm}
@@ -108,15 +101,12 @@ const AddCard: React.FC<Props> = ({ onAddCard, card }) => {
               //type="number"
               required
             />
-            <input
+
+            <InputImage
+              name="image"
               type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              //required
+              onInputChange={handleImageChange}
             />
-            {/* <Button type="submit" variant="contained" color="primary">
-              Add Card
-            </Button> */}
           </Form>
         </Paper>
       </Box>

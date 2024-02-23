@@ -31,7 +31,7 @@ const FormButton: FC<Props> & ButtonProps = ({
       variant={variant}
       component={component}
       onClick={handleClick}
-      disabled={disabled}
+      // disabled={disabled}
       fullWidth
       type="submit"
       sx={{ bgcolor: "rgba(191, 30, 46, 1)" }}

@@ -3,21 +3,23 @@ import CardInterface from "../interfaces/CardInterface";
 import { addCard, changeLikeStatus, getCard, getCards } from "./cardApi";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/routesModel";
+import { useUser } from "../../App";
 
 type ErrorType = null | string;
 type CardsType = null | CardInterface[];
 export type CardType =
   | CardInterface
   | {
-      _id: "";
-      title: "";
-      description: "";
-      price: 0;
+      _id: string; // Updated to be non-empty string
+      title: string;
+      description: string;
+      price: number;
       image: null;
     }
   | null;
 
 export const useCards = () => {
+  const { user } = useUser();
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<ErrorType>(null);
   const [cards, setCards] = useState<CardsType>(null);
@@ -38,10 +40,29 @@ export const useCards = () => {
 
   const handleAddCard = async (card: CardType) => {
     try {
+      console.log("User:", user);
+      if (!user || !user.isAdmin) {
+        console.log("User does not have permission to add cards");
+        // Display an error or return early if the user doesn't have permission
+        return;
+      }
       setLoading(true);
+      if (!card || !card._id) {
+        console.error("Invalid card object or missing _id property:", card);
+        throw new Error("Invalid card object or missing _id property");
+      }
       const cardData = await addCard(card);
-      requestStatus(false, null, null, cardData);
-      navigate(ROUTES.DISH);
+      if (cardData) {
+        requestStatus(false, null, null, cardData);
+        navigate(ROUTES.DISH);
+      } else {
+        requestStatus(
+          false,
+          "An error occurred while adding the card.",
+          null,
+          null
+        );
+      }
     } catch (error) {
       console.error("Error adding card:", error);
       if (typeof error === "string") {
