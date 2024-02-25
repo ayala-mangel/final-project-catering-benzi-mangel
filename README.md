@@ -23,5 +23,3 @@ This project is a boutique catering website built with React, NodeJS, and MongoD
 - Fork the repository and create a feature branch.
 - Submit a pull request with a detailed description of changes.
 
-## License
-This project is licensed under the [MIT License](LICENSE).
