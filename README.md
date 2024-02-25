@@ -1,4 +1,3 @@
-# final-project-catering-benzi-mangel
 # Boutique Catering Website
 
 ## Overview
